@@ -22,7 +22,7 @@ def act():
                 acta[acta.index(lst)] = [config.CITY[lst[0]], int(lst[1].split("-")[1].split()[0])]
 
         return sorted(acta), count
-    except Exception as e:
+    except Exception:
         return [], ""
 
 
@@ -57,7 +57,7 @@ def weather(moment):
         dire = soup.find_all("div", class_="direction")
         prec = soup.find_all("div", class_="item-unit")
 
-        k, s, weather = 0, 0, {}
+        weather = {}
 
         for i in range(8):
             par = wind[i].get_text().split()[0].split('-')

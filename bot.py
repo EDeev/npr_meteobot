@@ -157,7 +157,7 @@ async def act(message: types.Message):
 
 
 @dp.message_handler(commands=['weather'])
-async def storm(message: types.Message):
+async def weather_command(message: types.Message):
     text = message.text.split()
     try:
         day = int(text[1])
