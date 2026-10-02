@@ -1,5 +1,7 @@
-API_TOKEN = 'token from BotFather'  # ОСНОВНОЙ
-# API_TOKEN = 'token from BotFather'  # ТЕСТЫ
+import os
+
+# Токен бота от @BotFather — из переменной окружения BOT_TOKEN
+API_TOKEN = os.environ.get('BOT_TOKEN', '')
 
 CITY = {'Центральный район': [1, 'Норильск'], 'район Талнах': [2, 'Талнах'],
         'ж/о Оганер': [3, 'Оганер'], 'район Кайеркан': [4, 'Кайеркан']}

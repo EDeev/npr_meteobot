@@ -1,4 +1,7 @@
+import os
 import sqlite3
+
+SCHEMA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'schema.sql')
 
 
 class SQLighter:
@@ -6,6 +9,14 @@ class SQLighter:
         """Подключаемся к БД и сохраняем курсор соединения"""
         self.connection = sqlite3.connect(database)
         self.cursor = self.connection.cursor()
+        self._create_if_empty()
+
+    def _create_if_empty(self):
+        """Новая база: создаём таблицы и служебные строки из schema.sql"""
+        exists = self.cursor.execute("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'users'").fetchone()
+        if not exists:
+            with open(SCHEMA, encoding='utf-8') as f:
+                self.connection.executescript(f.read())
 
     def user_exists(self, id_user):
         """Проверяем, есть ли уже пользователь в базе"""
