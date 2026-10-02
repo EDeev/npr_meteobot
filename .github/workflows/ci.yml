@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - run: pip install ruff==0.14.0
+      - name: Ruff (синтаксис и ошибки)
+        run: ruff check --select E9,F .
+      - name: База создаётся из schema.sql
+        run: |
+          python -c "import sql; db = sql.SQLighter('/tmp/t.db'); db.add_user('1'); assert db.user_exists('1')"
