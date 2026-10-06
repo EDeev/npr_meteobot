@@ -3,6 +3,7 @@
 **Русский** · [English](README.en.md)
 
 [![CI](https://github.com/EDeev/npr_meteobot/actions/workflows/ci.yml/badge.svg)](https://github.com/EDeev/npr_meteobot/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/EDeev/npr_meteobot)](https://github.com/EDeev/npr_meteobot/releases)
 
 Telegram-бот для школьников Норильского промышленного района: присылает актировки (отмену занятий
 из-за мороза и ветра) для своей смены и района и показывает прогноз погоды.
@@ -24,6 +25,9 @@ BOT_TOKEN=токен_от_BotFather python bot.py
 
 База `sub.db` создаётся при первом запуске из `schema.sql`. Для актировок нужен Chrome: сайт
 администрации читается через Selenium.
+
+**Docker:** `docker run -d -e BOT_TOKEN=токен -v meteobot-data:/data ghcr.io/edeev/npr_meteobot` (то же —
+`git.deev.su/edeev/npr_meteobot`). Chromium для прогноза уже в образе, `sub.db` — в томе `/data`.
 
 ## Лицензия
 

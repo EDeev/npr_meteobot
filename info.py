@@ -1,6 +1,8 @@
 # - * - coding: utf-8 - * -
+import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 
 from bs4 import BeautifulSoup
 import requests, config
@@ -40,8 +42,12 @@ def weather(moment):
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument('--no-sandbox')
-        chromedriver = 'chromedriver'
-        browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=chrome_options)
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        if os.environ.get('CHROME_BIN'):
+            chrome_options.binary_location = os.environ['CHROME_BIN']
+        # Selenium 4: драйвер — через Service, параметры executable_path/chrome_options убраны в 4.10
+        service = Service(os.environ.get('CHROMEDRIVER', 'chromedriver'))
+        browser = webdriver.Chrome(service=service, options=chrome_options)
 
         # После успешного входа в систему переходим на страницу «Gismeteo»
         browser.get(f'https://www.gismeteo.ru/weather-norilsk-3957/{moment}')

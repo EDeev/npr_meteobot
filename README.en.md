@@ -3,6 +3,7 @@
 [Русский](README.md) · **English**
 
 [![CI](https://github.com/EDeev/npr_meteobot/actions/workflows/ci.yml/badge.svg)](https://github.com/EDeev/npr_meteobot/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/EDeev/npr_meteobot)](https://github.com/EDeev/npr_meteobot/releases)
 
 A Telegram bot for schoolchildren in the Norilsk industrial area: it sends class cancellations due to frost
 and wind ("aktirovka") for the user's shift and district and shows the weather forecast.
@@ -24,6 +25,9 @@ BOT_TOKEN=token_from_BotFather python bot.py
 
 The `sub.db` database is created on first run from `schema.sql`. Cancellations need Chrome: the
 administration site is read with Selenium.
+
+**Docker:** `docker run -d -e BOT_TOKEN=token -v meteobot-data:/data ghcr.io/edeev/npr_meteobot` (same as
+`git.deev.su/edeev/npr_meteobot`). Chromium for the forecast is in the image, `sub.db` lives in the `/data` volume.
 
 ## License
 
